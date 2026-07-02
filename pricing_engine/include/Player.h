@@ -1,3 +1,5 @@
+#pragma once
+
 #include <PriceProvider.h>
 #include <GameEvent.h>
 #include <string>
