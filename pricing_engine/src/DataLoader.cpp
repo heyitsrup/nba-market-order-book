@@ -86,6 +86,8 @@ std::vector<GameEvent> DataLoader::loadEvents(const std::string &filename)
             game.personalFouls = parseInt(fields[31]);
             game.turnovers = parseInt(fields[30]);
             game.freeThrowsMissed = parseInt(fields[22]) - parseInt(fields[21]);
+
+            events.push_back(game);
         }
         catch (const std::exception &e)
         {

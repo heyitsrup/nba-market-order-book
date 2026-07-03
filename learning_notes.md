@@ -9,4 +9,4 @@
 - `PerformanceScorer.cpp` calculates [game score](https://www.nbastuffer.com/analytics101/game-score/) for given game event - each event being for single player.
 
 ## 2026-07-03
-- Need to use unit testing framework 
+- Need to use unit testing framework; downloaded CMake and Catch2
