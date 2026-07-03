@@ -1,6 +1,6 @@
 #pragma once
 #include <vector>
-#include <GameEvent.h>
+#include <GameEvent.hpp>
 #include <string>
 
 class DataLoader {

@@ -2,7 +2,7 @@
 
 #include <map>
 #include <string>
-#include <GameEvent.h>
+#include <GameEvent.hpp>
 
 class FairValueTracker {
 public:

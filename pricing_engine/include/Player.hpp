@@ -1,10 +1,10 @@
 #pragma once
 
-#include <PriceProvider.h>
-#include <GameEvent.h>
+#include <PriceProvider.hpp>
+#include <GameEvent.hpp>
 #include <string>
-#include <FairValueTracker.h>
-#include <PriceScaler.h>
+#include <FairValueTracker.hpp>
+#include <PriceScaler.hpp>
 
 class Player : public PriceProvider {
 public:

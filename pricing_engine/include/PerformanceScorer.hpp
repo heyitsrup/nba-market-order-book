@@ -1,6 +1,6 @@
 #pragma once
 
-#include <GameEvent.h>
+#include <GameEvent.hpp>
 
 class PerformanceScorer {
 public:

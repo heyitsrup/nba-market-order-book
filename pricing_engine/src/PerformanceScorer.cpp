@@ -1,5 +1,5 @@
-#include <GameEvent.h>
-#include <PerformanceScorer.h>
+#include <GameEvent.hpp>
+#include <PerformanceScorer.hpp>
 
 // Game Score is a player evaluation metric which can be considered John Hollinger‘s 
 // simple and linear version of the Player Efficiency Rating.
@@ -20,4 +20,6 @@ double PerformanceScorer::score(const GameEvent& event) const {
     double gameScore = points + weightedFieldGoalsMade + weightedOffensiveRebounds + weightedDefensiveRebounds 
     + steals + weightedAssists + weightedBlockedShots - weightedFieldGoalsAttempted - weightedFreeThrowsMissed 
     - weightedPersonalFouls - turnovers;
+
+    return gameScore;
 }
