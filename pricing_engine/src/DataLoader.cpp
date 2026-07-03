@@ -64,10 +64,10 @@ std::vector<GameEvent> DataLoader::loadEvents(const std::string &filename)
             continue;
 
         auto fields = splitCsvLine(line);
-        if (fields.size() != 33)
+        if (fields.size() != 34)
         {
             std::cerr << "[pricing_engine] Malformed row at line " << lineNum
-                      << " (got " << fields.size() << " fields, expected 11)\n";
+                      << " (got " << fields.size() << " fields, expected 34)\n";
             continue;
         }
         GameEvent game;

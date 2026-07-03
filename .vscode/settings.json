@@ -1,3 +1,5 @@
 {
-    "cmake.sourceDirectory": "/Users/rup/Git/nba-market-order-book/pricing_engine/tests"
+  "cmake.buildDirectory": "${workspaceFolder}/build",
+  "testMate.cpp.test.executables": "build/tests/tests",
+  "cmake.sourceDirectory": "/Users/rup/Git/nba-market-order-book/pricing_engine"
 }
