@@ -52,8 +52,7 @@ std::vector<GameEvent> DataLoader::loadEvents(const std::string &filename)
     std::ifstream file(filename);
     if (!file.is_open())
     {
-        std::cerr << "[pricing_engine] Error: Cannot open boxscores file:" << filename << std::endl;
-        return events;
+        throw DataLoaderFileException("Cannot open boxscores file: " + filename);
     }
 
     std::string line;
@@ -68,6 +67,7 @@ std::vector<GameEvent> DataLoader::loadEvents(const std::string &filename)
         {
             std::cerr << "[pricing_engine] Malformed row at line " << lineNum
                       << " (got " << fields.size() << " fields, expected 34)\n";
+            ++lineNum;
             continue;
         }
         GameEvent game;
@@ -93,7 +93,7 @@ std::vector<GameEvent> DataLoader::loadEvents(const std::string &filename)
         {
             std::cerr << "[pricing_engine] Exception parsing game event at line " << lineNum
                       << ": " << e.what() << "\n";
-            continue;
+            ++lineNum;
         }
     }
 

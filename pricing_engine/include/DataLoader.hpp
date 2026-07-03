@@ -2,6 +2,13 @@
 #include <vector>
 #include <GameEvent.hpp>
 #include <string>
+#include <stdexcept>
+
+class DataLoaderFileException : public std::runtime_error {
+public:
+    explicit DataLoaderFileException(const std::string& msg)
+        : std::runtime_error(msg) {}
+};
 
 class DataLoader {
 private:
