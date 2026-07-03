@@ -1,4 +1,4 @@
-#pragma once
+#include <DataLoader.h>
 #include <vector>
 #include <GameEvent.h>
 #include <unordered_set>
@@ -7,12 +7,12 @@
 #include <fstream>
 #include <sstream>
 
-static int64_t parse_int(const std::string& s) {
+int DataLoader::parseInt(const std::string& s) {
     if (s.empty()) return 0;
     try { return stoi(s); } catch (...) { return 0; }
 }
 
-static std::string trim(const std::string& str) {
+std::string DataLoader::trim(const std::string& str) {
     if (str.empty()) return "";
     size_t first = str.find_first_not_of(" \t\r\n\"");
     if (first == std::string::npos) return "";
@@ -20,7 +20,7 @@ static std::string trim(const std::string& str) {
     return str.substr(first, last - first + 1);
 }
 
-static std::vector<std::string> splitCsvLine(const std::string& line) {
+std::vector<std::string> DataLoader::splitCsvLine(const std::string& line) {
     std::vector<std::string> result;
     std::stringstream ss(line);
     std::string field;
@@ -30,7 +30,7 @@ static std::vector<std::string> splitCsvLine(const std::string& line) {
     return result;
 }
 
-std::vector<GameEvent> loadEvents(const std::string& filename) {
+std::vector<GameEvent> DataLoader::loadEvents(const std::string& filename) {
     std::vector<GameEvent> events;
 
     std::ifstream file(filename);
@@ -54,16 +54,17 @@ std::vector<GameEvent> loadEvents(const std::string& filename) {
         try {
             game.playerId               = fields[6];
             game.gameId                 = fields[0];
-            game.points                 = parse_int(fields[32]);
-            game.fieldGoalsMade         = parse_int(fields[15]);
-            game.fieldGoalsAttempted    = parse_int(fields[16]);
-            game.offensiveRebounds      = parse_int(fields[24]);
-            game.defensiveRebounds      = parse_int(fields[25]);
-            game.steals                 = parse_int(fields[28]);
-            game.assists                = parse_int(fields[27]);
-            game.blockedShots           = parse_int(fields[29]);
-            game.personalFouls          = parse_int(fields[31]);
-            game.turnovers              = parse_int(fields[30]);
+            game.points                 = parseInt(fields[32]);
+            game.fieldGoalsMade         = parseInt(fields[15]);
+            game.fieldGoalsAttempted    = parseInt(fields[16]);
+            game.offensiveRebounds      = parseInt(fields[24]);
+            game.defensiveRebounds      = parseInt(fields[25]);
+            game.steals                 = parseInt(fields[28]);
+            game.assists                = parseInt(fields[27]);
+            game.blockedShots           = parseInt(fields[29]);
+            game.personalFouls          = parseInt(fields[31]);
+            game.turnovers              = parseInt(fields[30]);
+            game.freeThrowsMissed       = parseInt(fields[22]) - parseInt(fields[21]);
         } catch (const std::exception& e) {
             std::cerr << "[ingestion] Exception parsing swap at line " << lineNum
                  << ": " << e.what() << "\n";
