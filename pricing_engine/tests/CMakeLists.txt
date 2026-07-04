@@ -6,7 +6,11 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(Catch2)
 
-add_executable(tests DataLoaderTest.cpp PerformanceScorerTest.cpp)
+add_executable(tests 
+  DataLoaderTest.cpp 
+  PerformanceScorerTest.cpp
+)
+
 target_include_directories(tests PRIVATE ${CMAKE_SOURCE_DIR}/src)
 target_include_directories(tests PRIVATE ${CMAKE_SOURCE_DIR}/include)
 target_link_libraries(tests PRIVATE pricing_engine_lib Catch2::Catch2WithMain)

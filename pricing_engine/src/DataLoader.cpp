@@ -7,6 +7,7 @@
 #include <fstream>
 #include <sstream>
 
+// Convert string from CSV to integer
 int DataLoader::parseInt(const std::string &s)
 {
     if (s.empty())
@@ -45,6 +46,7 @@ std::vector<std::string> DataLoader::splitCsvLine(const std::string &line)
     return result;
 }
 
+// Create GameEvent object for each row in CSV file
 std::vector<GameEvent> DataLoader::loadEvents(const std::string &filename)
 {
     std::vector<GameEvent> events;

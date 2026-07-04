@@ -13,3 +13,5 @@
 - .cpp file must be added to root `CMakeLists.txt` file under add_library
 - No easy way to return float values to x number of digits -- use tolerance unit tests instead
 - C++ doesn't support Python-style named field initialization
+- `std::map<X, Y>`, what it actually stores is a whole bunch of `std::pair<const X, Y>`s.
+- `std::pair<X, Y>` called p, `p.first` is an X object and `p.second` is a Y object.
