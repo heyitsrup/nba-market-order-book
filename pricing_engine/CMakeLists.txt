@@ -7,6 +7,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 add_library(pricing_engine_lib
     src/DataLoader.cpp
+    src/PerformanceScorer.cpp
 )
 target_include_directories(pricing_engine_lib PUBLIC include)
 

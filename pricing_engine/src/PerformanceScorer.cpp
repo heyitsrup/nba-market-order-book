@@ -4,7 +4,7 @@
 // Game Score is a player evaluation metric which can be considered John Hollinger‘s 
 // simple and linear version of the Player Efficiency Rating.
 
-double PerformanceScorer::score(const GameEvent& event) const {
+double PerformanceScorer::score(const GameEvent& event) {
     int points                          = event.points;
     double weightedFieldGoalsMade       = event.fieldGoalsMade * 0.4;
     double weightedFieldGoalsAttempted  = event.fieldGoalsAttempted * 0.7;

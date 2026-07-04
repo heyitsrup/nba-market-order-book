@@ -4,5 +4,5 @@
 
 class PerformanceScorer {
 public:
-    double score(const GameEvent& event) const;
+    static double score(const GameEvent& event);
 };
