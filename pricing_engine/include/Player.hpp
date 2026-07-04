@@ -15,6 +15,7 @@ public:
     double getPrice() const override;
     std::string getId() const override;
     std::string getName() const;
+    std::string getTeamTicker() const;
 
 private:
     std::string playerId;

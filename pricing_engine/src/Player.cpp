@@ -21,6 +21,11 @@ std::string Player::getId() const
     return playerId;
 }
 
+std::string Player::getTeamTicker() const
+{
+    return teamTicker;
+}
+
 std::string Player::getName() const
 {
     return playerName;
