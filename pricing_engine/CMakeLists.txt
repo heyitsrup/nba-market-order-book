@@ -11,6 +11,7 @@ add_library(pricing_engine_lib
     src/FairValueTracker.cpp
     src/PriceScaler.cpp
     src/Player.cpp
+    src/Index.cpp
 )
 target_include_directories(pricing_engine_lib PUBLIC include)
 

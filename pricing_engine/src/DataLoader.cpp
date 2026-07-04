@@ -8,7 +8,7 @@
 #include <sstream>
 
 // Convert string from CSV to integer
-int DataLoader::parseInt(const std::string &s)
+int DataLoader::parseInt(const std::string& s)
 {
     if (s.empty())
         return 0;
@@ -23,7 +23,7 @@ int DataLoader::parseInt(const std::string &s)
     }
 }
 
-std::string DataLoader::trim(const std::string &str)
+std::string DataLoader::trim(const std::string& str)
 {
     if (str.empty())
         return "";
@@ -34,7 +34,7 @@ std::string DataLoader::trim(const std::string &str)
     return str.substr(first, last - first + 1);
 }
 
-std::vector<std::string> DataLoader::splitCsvLine(const std::string &line)
+std::vector<std::string> DataLoader::splitCsvLine(const std::string& line)
 {
     std::vector<std::string> result;
     std::stringstream ss(line);
@@ -47,7 +47,7 @@ std::vector<std::string> DataLoader::splitCsvLine(const std::string &line)
 }
 
 // Create GameEvent object for each row in CSV file
-std::vector<GameEvent> DataLoader::loadEvents(const std::string &filename)
+std::vector<GameEvent> DataLoader::loadEvents(const std::string& filename)
 {
     std::vector<GameEvent> events;
 

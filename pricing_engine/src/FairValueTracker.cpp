@@ -1,6 +1,5 @@
 #include "FairValueTracker.hpp"
 
-
 FairValueTracker::FairValueTracker(double alpha, std::unordered_map<std::string, double> initialValues)
     : fairValues(std::move(initialValues)), alpha(alpha) {}
 

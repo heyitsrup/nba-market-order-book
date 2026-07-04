@@ -8,6 +8,7 @@
 #include <unordered_map>
 #include "Player.hpp"
 #include "Index.hpp"
+#include <cmath>
 
 int main()
 {
@@ -16,41 +17,44 @@ int main()
 
     std::unordered_map<std::string, std::unique_ptr<Player>> allPlayers;
     std::unordered_map<std::string, std::unique_ptr<Index>> allIndexes;
+    double alpha = alpha = 1 - std::pow(0.5, (1/12.5));
     FairValueTracker tracker(0.5);
     PriceScaler scaler;
 
-    for (GameEvent &event : events)
+    for (GameEvent& event : events)
     {
         std::string playerId = event.playerId;
         double gameScore = PerformanceScorer::score(event);
 
-        auto player = allPlayers.find(playerId);
-        if (player == allPlayers.end())
+        auto playerIt = allPlayers.find(playerId);
+        if (playerIt == allPlayers.end())
         {
-            allPlayers[playerId] = std::make_unique<Player>(event.playerId, event.playerName, event.teamTicker, tracker, scaler);
-            std::string teamTicker = player->second->getTeamTicker();
-            auto teamIndex = allIndexes.find(teamTicker);
-            if (teamIndex == allIndexes.end())
+            auto [newIt, ok] = allPlayers.emplace(
+                playerId,
+                std::make_unique<Player>(playerId, event.playerName, event.teamTicker, tracker, scaler));
+            playerIt = newIt;
+
+            std::string teamTicker = playerIt->second->getTeamTicker();
+            auto indexIt = allIndexes.find(teamTicker);
+            if (indexIt == allIndexes.end())
             {
-                allIndexes[teamTicker] = std::make_unique<Index>(event.teamTicker);
-            } else {
-                teamIndex->second->addAsset(player->second.get(), 1/15);
+                auto [newIndexIt, ok2] = allIndexes.emplace(teamTicker, std::make_unique<Index>(teamTicker));
+                indexIt = newIndexIt;
             }
+            indexIt->second->addAsset(playerIt->second.get(), 1.0 / 15);
         }
         else
         {
-            player->second->onGameEvent(event, gameScore);
-            std::string teamTicker = player->second->getTeamTicker();
-            auto teamIndex = allIndexes.find(teamTicker);
-            teamIndex->second->addAsset(player->second.get(), 1/15); 
+            playerIt->second->onGameEvent(event, gameScore);
         }
     }
 
-    for (const auto &[key, index] : allIndexes)
+    for (const auto& [key, index] : allIndexes)
     {
         std::string team = key;
-        for (const auto &[key, player] : index->getAllAssets()) {
-            std::cout << "Player: " << player->getName() << " (" <<  team << "), Player Price: $" << player->getPrice() << std::endl;
+        for (const auto& [provider, player] : index->getAllAssets())
+        {
+            std::cout << "Player: " << provider->getName() << " (" << team << "), Player Price: $" << provider->getPrice() << std::endl;
         }
     }
 
