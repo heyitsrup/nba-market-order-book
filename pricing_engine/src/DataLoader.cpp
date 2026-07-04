@@ -76,6 +76,8 @@ std::vector<GameEvent> DataLoader::loadEvents(const std::string &filename)
         try
         {
             game.playerId = fields[6];
+            game.playerName = fields[7] + " " + fields[8];
+            game.teamTicker = fields[4];
             game.gameId = fields[0];
             game.points = parseInt(fields[32]);
             game.fieldGoalsMade = parseInt(fields[15]);

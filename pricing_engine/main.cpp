@@ -17,21 +17,26 @@ int main()
     FairValueTracker tracker(0.5);
     PriceScaler scaler;
 
-    for (GameEvent& event : events) {
+    for (GameEvent &event : events)
+    {
         std::string playerId = event.playerId;
         double gameScore = PerformanceScorer::score(event);
-        
+
         auto player = allPlayers.find(playerId);
-        if (player == allPlayers.end()) {
-            allPlayers[playerId] = std::make_unique<Player>(event.playerId, tracker, scaler);
-        } else {
+        if (player == allPlayers.end())
+        {
+            allPlayers[playerId] = std::make_unique<Player>(event.playerId, event.playerName, event.teamTicker, tracker, scaler);
+        }
+        else
+        {
             player->second->onGameEvent(event, gameScore);
         }
     }
 
-    for (const auto& [key, player] : allPlayers) {
+    for (const auto &[key, player] : allPlayers)
+    {
 
-        std::cout << "PlayerID: " << key << ", Player Price: $" << player->getPrice() << std::endl;
+        std::cout << "Player: " << player->getName() << ", Player Price: $" << player->getPrice() << std::endl;
     }
 
     return 0;
