@@ -10,3 +10,6 @@
 
 ## 2026-07-03
 - Need to use unit testing framework; downloaded CMake and Catch2
+- .cpp file must be added to root `CMakeLists.txt` file under add_library
+- No easy way to return float values to x number of digits -- use tolerance unit tests instead
+- C++ doesn't support Python-style named field initialization
