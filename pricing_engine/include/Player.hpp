@@ -8,7 +8,9 @@
 
 class Player : public PriceProvider {
 public:
-    void onGameEvent(const GameEvent& event);
+    Player(std::string playerId, FairValueTracker& tracker, PriceScaler& scaler);
+    
+    void onGameEvent(const GameEvent& event, double gameScore);
     double getPrice() const override;
     std::string getId() const override;
 private:

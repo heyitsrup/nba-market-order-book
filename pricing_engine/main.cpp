@@ -5,19 +5,34 @@
 #include "PriceScaler.hpp"
 #include <string>
 #include <iostream>
+#include <unordered_map>
+#include "Player.hpp"
 
 int main()
 {
     std::string filename = "/Users/rup/Git/nba-market-order-book/pricing_engine/data/boxscores.csv";
     auto events = DataLoader::loadEvents(filename);
+
+    std::unordered_map<std::string, std::unique_ptr<Player>> allPlayers;
     FairValueTracker tracker(0.5);
+    PriceScaler scaler;
+
     for (GameEvent& event : events) {
+        std::string playerId = event.playerId;
         double gameScore = PerformanceScorer::score(event);
-        tracker.onGameEvent(event, gameScore);
+        
+        auto player = allPlayers.find(playerId);
+        if (player == allPlayers.end()) {
+            allPlayers[playerId] = std::make_unique<Player>(event.playerId, tracker, scaler);
+        } else {
+            player->second->onGameEvent(event, gameScore);
+        }
     }
 
-    for (auto& [playerId, fairValue] : tracker.allFairValues()) {
-        std::cout << "PlayerID: " << playerId << ", Player Price: $" << PriceScaler::toPrice(fairValue) << std::endl;
+    for (const auto& [key, player] : allPlayers) {
+
+        std::cout << "PlayerID: " << key << ", Player Price: $" << player->getPrice() << std::endl;
     }
+
     return 0;
 }
