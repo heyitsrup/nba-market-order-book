@@ -9,6 +9,8 @@ FetchContent_MakeAvailable(Catch2)
 add_executable(tests 
   DataLoaderTest.cpp 
   PerformanceScorerTest.cpp
+  FairValueTrackerTest.cpp
+  PriceScalerTest.cpp
 )
 
 target_include_directories(tests PRIVATE ${CMAKE_SOURCE_DIR}/src)

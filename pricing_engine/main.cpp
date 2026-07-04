@@ -2,6 +2,7 @@
 #include "GameEvent.hpp"
 #include "PerformanceScorer.hpp"
 #include "FairValueTracker.hpp"
+#include "PriceScaler.hpp"
 #include <string>
 #include <iostream>
 
@@ -16,7 +17,7 @@ int main()
     }
 
     for (auto& [playerId, fairValue] : tracker.allFairValues()) {
-        std::cout << "PlayerID: " << playerId << ", Fair Value: " << fairValue << std::endl;
+        std::cout << "PlayerID: " << playerId << ", Player Price: $" << PriceScaler::toPrice(fairValue) << std::endl;
     }
     return 0;
 }

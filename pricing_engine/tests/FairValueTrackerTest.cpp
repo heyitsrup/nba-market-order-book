@@ -1,7 +1,6 @@
 #include <catch2/catch_test_macros.hpp>
 #include <catch2/matchers/catch_matchers_floating_point.hpp>
 #include "FairValueTracker.hpp"
-#include <iostream>
 
 TEST_CASE("Fair Value Tracker - successful test", "[FairValueTracker]") {
     GameEvent event{
@@ -24,10 +23,6 @@ TEST_CASE("Fair Value Tracker - successful test", "[FairValueTracker]") {
     FairValueTracker tracker(0.8, initialValues);
 
     tracker.onGameEvent(event, 15);
-
-    for (auto& [playerId, fairValue] : tracker.allFairValues()) {
-        std::cout << "PlayerID: " << playerId << ", Fair Value: " << fairValue << std::endl;
-    }
 
     REQUIRE_THAT(tracker.getFairValue("testPlayerId1"), Catch::Matchers::WithinAbs(14, 1e-9));
 }
