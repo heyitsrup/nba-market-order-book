@@ -16,3 +16,7 @@
 - `std::map<X, Y>`, what it actually stores is a whole bunch of `std::pair<const X, Y>`s.
 - `std::pair<X, Y>` called p, `p.first` is an X object and `p.second` is a Y object.
 - `override` only appears in the header's declaration, not in the `.cpp` definition - the header is where it matters for the compiler to check against the base class
+- the pointer * points to the address location of the data. The reference & points to the data.
+- override also requires implementation in .cpp file
+- can use explicit in header for constructor (like in Index.hpp) if single argument
+- unique_ptr means single, clear owner of an object, making ownership explicit and preventing memory leaks.
