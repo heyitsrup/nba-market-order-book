@@ -24,8 +24,8 @@ def fetch_boxscores(game_id, retries=5):
     raise Exception("Failed after retries")
 
 if __name__ == "__main__":
-    file = 'boxscores.csv'
+    file = 'pricing_engine/data/boxscores.csv'
     for game_id in fetch_games(season):
         current_boxscore = fetch_boxscores(game_id=game_id)
-        current_boxscore.to_csv("boxscores.csv", mode="a", header=False, index=False)
+        current_boxscore.to_csv(file, mode="a", header=False, index=False)
         time.sleep(1.5)
