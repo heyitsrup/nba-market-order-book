@@ -17,8 +17,8 @@ int main()
 
     std::unordered_map<std::string, std::unique_ptr<Player>> allPlayers;
     std::unordered_map<std::string, std::unique_ptr<Index>> allIndexes;
-    double alpha = alpha = 1 - std::pow(0.5, (1/12.5));
-    FairValueTracker tracker(0.5);
+    double alpha = alpha = 1 - std::pow(0.5, (1/12.5)); // Average number of monthly games played
+    FairValueTracker tracker(alpha);
     PriceScaler scaler;
 
     for (GameEvent& event : events)

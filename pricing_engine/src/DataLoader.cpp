@@ -58,6 +58,8 @@ std::vector<GameEvent> DataLoader::loadEvents(const std::string& filename)
     }
 
     std::string line;
+    getline(file, line);
+
     int lineNum = 1;
     while (getline(file, line))
     {
@@ -65,10 +67,10 @@ std::vector<GameEvent> DataLoader::loadEvents(const std::string& filename)
             continue;
 
         auto fields = splitCsvLine(line);
-        if (fields.size() != 34)
+        if (fields.size() != 36)
         {
             std::cerr << "[pricing_engine] Malformed row at line " << lineNum
-                      << " (got " << fields.size() << " fields, expected 34)\n";
+                      << " (got " << fields.size() << " fields, expected 36)\n";
             ++lineNum;
             continue;
         }
@@ -90,6 +92,7 @@ std::vector<GameEvent> DataLoader::loadEvents(const std::string& filename)
             game.personalFouls = parseInt(fields[31]);
             game.turnovers = parseInt(fields[30]);
             game.freeThrowsMissed = parseInt(fields[22]) - parseInt(fields[21]);
+            game.teamWon = (fields[34] == "W") ? true : false;
 
             events.push_back(game);
         }
