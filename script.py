@@ -122,7 +122,7 @@ def main():
             current_boxscore.to_csv(
                 OUTPUT_FILE, mode="a", header=write_header, index=False
             )
-            write_header = False
+            write_header = True
 
             completed_ids.add(game_id)
             save_progress(completed_ids)

@@ -58,6 +58,8 @@ std::vector<GameEvent> DataLoader::loadEvents(const std::string& filename)
     }
 
     std::string line;
+    getline(file, line);
+
     int lineNum = 1;
     while (getline(file, line))
     {
