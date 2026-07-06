@@ -1,30 +1,25 @@
 #include <DataLoader.hpp>
-#include <vector>
 #include <GameEvent.hpp>
-#include <unordered_set>
-#include <string>
-#include <iostream>
 #include <fstream>
+#include <iostream>
 #include <sstream>
+#include <string>
+#include <unordered_set>
+#include <vector>
 
 // Convert string from CSV to integer
-int DataLoader::parseInt(const std::string& s)
-{
+int DataLoader::parseInt(const std::string& s) {
     if (s.empty())
         return 0;
-    try
-    {
+    try {
         // C++ standard library function used to convert a String TO Integer
         return stoi(s);
-    }
-    catch (...)
-    {
+    } catch (...) {
         return 0;
     }
 }
 
-std::string DataLoader::trim(const std::string& str)
-{
+std::string DataLoader::trim(const std::string& str) {
     if (str.empty())
         return "";
     size_t first = str.find_first_not_of(" \t\r\n\"");
@@ -34,26 +29,22 @@ std::string DataLoader::trim(const std::string& str)
     return str.substr(first, last - first + 1);
 }
 
-std::vector<std::string> DataLoader::splitCsvLine(const std::string& line)
-{
+std::vector<std::string> DataLoader::splitCsvLine(const std::string& line) {
     std::vector<std::string> result;
     std::stringstream ss(line);
     std::string field;
-    while (getline(ss, field, ','))
-    {
+    while (getline(ss, field, ',')) {
         result.push_back(trim(field));
     }
     return result;
 }
 
 // Create GameEvent object for each row in CSV file
-std::vector<GameEvent> DataLoader::loadEvents(const std::string& filename)
-{
+std::vector<GameEvent> DataLoader::loadEvents(const std::string& filename) {
     std::vector<GameEvent> events;
 
     std::ifstream file(filename);
-    if (!file.is_open())
-    {
+    if (!file.is_open()) {
         throw DataLoaderFileException("Cannot open boxscores file: " + filename);
     }
 
@@ -61,22 +52,19 @@ std::vector<GameEvent> DataLoader::loadEvents(const std::string& filename)
     getline(file, line);
 
     int lineNum = 1;
-    while (getline(file, line))
-    {
+    while (getline(file, line)) {
         if (line.empty())
             continue;
 
         auto fields = splitCsvLine(line);
-        if (fields.size() != 36)
-        {
-            std::cerr << "[pricing_engine] Malformed row at line " << lineNum
-                      << " (got " << fields.size() << " fields, expected 36)\n";
+        if (fields.size() != 36) {
+            std::cerr << "[pricing_engine] Malformed row at line " << lineNum << " (got "
+                      << fields.size() << " fields, expected 36)\n";
             ++lineNum;
             continue;
         }
         GameEvent game;
-        try
-        {
+        try {
             game.playerId = fields[6];
             game.playerName = fields[7] + " " + fields[8];
             game.teamTicker = fields[4];
@@ -95,11 +83,9 @@ std::vector<GameEvent> DataLoader::loadEvents(const std::string& filename)
             game.teamWon = (fields[34] == "W") ? true : false;
 
             events.push_back(game);
-        }
-        catch (const std::exception &e)
-        {
-            std::cerr << "[pricing_engine] Exception parsing game event at line " << lineNum
-                      << ": " << e.what() << "\n";
+        } catch (const std::exception& e) {
+            std::cerr << "[pricing_engine] Exception parsing game event at line " << lineNum << ": "
+                      << e.what() << "\n";
             ++lineNum;
         }
     }

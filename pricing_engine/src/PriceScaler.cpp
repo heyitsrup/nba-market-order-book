@@ -1,9 +1,8 @@
 #include "PriceScaler.hpp"
-#include <cmath>
 #include <algorithm>
+#include <cmath>
 
-double PriceScaler::toPrice(double fairValue) const
-{
+double PriceScaler::toPrice(double fairValue) const {
     const double k = 0.341;
     const double base = 6.63;
     double clampedFV = std::max(fairValue, 0.0);
