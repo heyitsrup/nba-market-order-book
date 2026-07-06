@@ -1,8 +1,7 @@
-# NBA Market Order Book
+# High-Throughput Limit Order Book for Player Performance Derivatives
 
-A trading-systems demo project: NBA players are modeled as tradable instruments, priced off real
-performance data, and (eventually) matched through a limit order book — the goal being to
-demonstrate low-latency systems and eTrading development skills in C++.
+A trading-systems demo C++ project: NBA players are modeled as tradable instruments, priced off real
+performance data, and (eventually) matched through a limit order book. Developed using Vim. No LLM-generated code.
 
 ## Concept
 
@@ -103,8 +102,3 @@ This section will be filled in as the matching engine is designed and built. Pla
   ingestion, communicating via a lock-free queue
 - Latency/throughput benchmarks (p50/p99 for insert, cancel, match)
 - (Stretch) networking layer exposing the engine over sockets/websocket for a simple client/dashboard
-
-## Deployment (planned)
-
-A CLI or Streamlit front-end to visualize live prices/order book state — deferred until the core
-engines are complete.
