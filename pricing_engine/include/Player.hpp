@@ -1,15 +1,18 @@
 #pragma once
 
-#include <PriceProvider.hpp>
-#include <GameEvent.hpp>
-#include <string>
 #include <FairValueTracker.hpp>
+#include <GameEvent.hpp>
+#include <PriceProvider.hpp>
 #include <PriceScaler.hpp>
+#include <string>
 
-class Player : public PriceProvider
-{
+class Player : public PriceProvider {
 public:
-    Player(std::string playerId, std::string playerName, std::string teamTicker, FairValueTracker& tracker, PriceScaler& scaler);
+    Player(std::string playerId,
+           std::string playerName,
+           std::string teamTicker,
+           FairValueTracker& tracker,
+           PriceScaler& scaler);
 
     void onGameEvent(const GameEvent& event, double gameScore);
     double getPrice() const override;

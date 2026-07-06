@@ -1,9 +1,8 @@
+#include <Index.hpp>
 #include <PriceProvider.hpp>
 #include <string>
-#include <Index.hpp>
 
-Index::Index(std::string teamTicker) 
-    : teamTicker(std::move(teamTicker)) {}
+Index::Index(std::string teamTicker) : teamTicker(std::move(teamTicker)) {}
 
 void Index::addAsset(PriceProvider* provider, double weight) {
     assets.emplace_back(provider, weight);

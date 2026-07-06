@@ -1,7 +1,7 @@
-#include <catch2/catch_test_macros.hpp>
 #include "DataLoader.hpp"
-#include <fstream>
+#include <catch2/catch_test_macros.hpp>
 #include <cstdio>
+#include <fstream>
 
 TEST_CASE("Load Events throws on missing file", "[DataLoader]") {
     std::string filename = "/path/does/not/exist.csv";

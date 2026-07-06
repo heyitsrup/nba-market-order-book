@@ -1,6 +1,7 @@
 #include "FairValueTracker.hpp"
 
-FairValueTracker::FairValueTracker(double alpha, std::unordered_map<std::string, double> initialValues)
+FairValueTracker::FairValueTracker(double alpha,
+                                   std::unordered_map<std::string, double> initialValues)
     : fairValues(std::move(initialValues)), alpha(alpha) {}
 
 void FairValueTracker::onGameEvent(const GameEvent& event, double gameScore) {
